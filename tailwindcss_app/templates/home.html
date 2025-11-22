@@ -1,0 +1,72 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block content %}
+
+  <!-- Section Hero -->
+  <section id="accueil" class="relative h-screen flex items-center justify-center bg-cover bg-center" 
+           style="background-image: url('https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=1920&q=80');">
+    <div class="absolute inset-0 bg-black/50"></div>
+    <div class="relative z-10 text-center text-white px-6">
+      <h2 class="text-5xl md:text-6xl font-bold title-font mb-6 ">Une expérience culinaire raffinée</h2>
+      <p class="text-lg md:text-xl mb-8">Savourez des plats d’exception dans une ambiance chaleureuse et élégante.</p>
+      <a href="{% url 'menu'%}" class="bg-amber-600 px-6 py-3 rounded-lg text-lg font-medium hover:bg-amber-700 transition">
+        Découvrir le menu
+      </a>
+    </div>
+  </section>
+
+  <!-- Section À propos -->
+  <section id="apropos" class="py-20 bg-gray-50">
+    <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-10 items-center">
+      <img src="https://images.unsplash.com/photo-1543353071-873f17a7a088?auto=format&fit=crop&w=800&q=80" alt="Chef" class="rounded-2xl shadow-lg">
+      <div>
+        <h3 class="text-4xl font-bold title-font text-amber-700 mb-4">À propos de nous</h3>
+        <p class="text-gray-600 leading-relaxed mb-6">
+          Le Gourmet est un restaurant gastronomique où la passion rencontre la créativité. 
+          Notre chef met à l’honneur les produits frais et locaux pour sublimer chaque plat.
+        </p>
+        <a href="{% url 'reservation' %}" class="bg-amber-700 text-white px-5 py-2 rounded-lg hover:bg-amber-800 transition">
+          Réserver une table
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section Menu -->
+  <section id="menu" class="py-20">
+    <div class="max-w-6xl mx-auto px-6 text-center">
+      <h3 class="text-4xl font-bold title-font text-amber-700 mb-10">Notre Menu</h3>
+      <div class="grid md:grid-cols-3 gap-10">
+        <div class="bg-white rounded-2xl shadow-lg p-6 hover:scale-105 transition">
+          <img src="{% static 'images/p-10.jpg' %}" alt="Entrée" class="rounded-xl mb-4">
+          <h4 class="text-2xl font-semibold mb-2">Entrées</h4>
+          <p class="text-gray-600">Des débuts légers et raffinés pour éveiller vos papilles.</p>
+        </div>
+        <div class="bg-white rounded-2xl shadow-lg p-6 hover:scale-105 transition">
+          <img src="{% static 'images/plat-5.jpg' %}" alt="Plat" class="rounded-xl mb-4">
+          <h4 class="text-2xl font-semibold mb-2">Plats</h4>
+          <p class="text-gray-600">Des créations originales inspirées par les saveurs du monde.</p>
+        </div>
+        <div class="bg-white rounded-2xl shadow-lg p-6 hover:scale-105 transition">
+          <img src="{% static 'images/d-6.jpg' %}" alt="Dessert" class="rounded-xl mb-4">
+          <h4 class="text-2xl font-semibold mb-2">Desserts</h4>
+          <p class="text-gray-600">Une touche sucrée pour finir en beauté votre expérience.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+
+  <!-- Section Contact -->
+  <section id="contact" class="bg-amber-700 text-white py-20">
+    <div class="max-w-6xl mx-auto px-6 text-center">
+      <h3 class="text-4xl font-bold title-font mb-6">Contact & Réservation</h3>
+      <p class="text-lg mb-8">📍 12 rue des Délices, Paris — 📞 01 23 45 67 89</p>
+      <a href="mailto:contact@legourmet.fr" class="bg-white text-amber-700 px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition">
+        Nous écrire
+      </a>
+    </div>
+  </section>
+
+{% endblock content %}
+

@@ -1,0 +1,67 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block content %}
+
+<section class="bg-gray-50 font-sans">
+  <!-- Header avec image -->
+  <section class="relative h-[60vh] flex items-center justify-center bg-cover bg-center" 
+           style="background-image: url('https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1350&q=80');">
+    <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+    <h1 class="relative text-5xl md:text-6xl font-bold text-white text-center">
+      Découvez nos Menus
+    </h1>
+  </section>
+
+  <div class="min-h-screen flex mt-5">
+
+    <!-- Sidebar -->
+    <aside class="w-72 bg-white shadow-md p-6 hidden md:block">
+      <h1 class="text-3xl font-bold mb-10 text-gray-800">Notre Menu</h1>
+      <nav class="space-y-4">
+        {% for category in categories %}
+          <button class="w-full text-left px-4 py-2 rounded hover:bg-gray-100 transition" 
+                  onclick="showSection('{{ category.name|slugify }}')">
+            <span>{{ category.name }}</span>
+            <div class="w-full h-px bg-gray-300 mt-1"></div>
+          </button>
+        {% endfor %}
+      </nav>
+    </aside>
+
+    <!-- Contenu principal -->
+    <main class="flex-1 p-8">
+      {% for category in categories %}
+        <section id="{{ category.name|slugify }}" 
+                 class="menu-section {% if not forloop.first %}hidden{% endif %}">
+
+          <h2 class="text-3xl font-semibold mb-6 text-gray-800">{{ category.name }}</h2>
+
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+            {% for dish in category.dishes.all %}
+              <div class="bg-white rounded-lg shadow hover:shadow-lg overflow-hidden transition">
+                <img src="{{ dish.image.url }}" alt="{{ dish.name }}" class="w-full h-48 object-cover">
+
+                <div class="p-4">
+                  <h3 class="text-xl font-semibold">{{ dish.name }}</h3>
+                  <p class="text-gray-600 mt-2">{{ dish.description }}</p>
+                  <span class="block mt-3 font-bold text-gray-900">{{ dish.price }} €</span>
+
+                  <!-- BOUTON AJOUT AU PANIER -->
+                  <a href="{% url 'add_to_cart' dish.id %}" 
+                     class="mt-3 inline-block bg-amber-700 text-white px-4 py-2 rounded hover:bg-amber-800 transition">
+                    Ajouter au panier
+                  </a>
+                </div>
+              </div>
+            {% endfor %}
+
+          </div>
+        </section>
+      {% endfor %}
+    </main>
+  </div>
+</section>
+
+
+{% endblock content %}

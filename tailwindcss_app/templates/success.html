@@ -1,0 +1,18 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block content %}
+<section class="bg-gray-50 h-screen flex items-center justify-center">
+
+  <div class="bg-white p-10 rounded-xl shadow-2xl text-center">
+    <h1 class="text-3xl font-bold mb-4 text-green-600">Merci !</h1>
+    <p class="text-gray-600 text-lg">
+      Votre reservation a bien été prise en compte. Nous vous répondrons dans les plus brefs délais.
+    </p>
+    <a href="{% url 'home' %}" class="inline-block mt-6 bg-black text-white px-6 py-3 rounded-lg">
+      Retour à l'accueil
+    </a>
+  </div>
+
+</section>
+{% endblock content %}
+

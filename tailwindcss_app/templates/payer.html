@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+ <section id="accueil" class="relative h-screen flex items-center justify-center bg-cover bg-center" 
+           style="background-image: url('https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=1920&q=80');">
+    <div class="absolute inset-0 bg-black/50"></div>
+    <div class="relative z-10 text-center text-white px-6">
+      <h2 class="text-5xl md:text-6xl font-bold title-font mb-6 ">Une cuisine créative dans une ambiance élégante et agréable.</h2>
+      <p class="text-lg md:text-xl mb-8">Laissez-vous tenter par des créations culinaires uniques dans un décor élégant.</p>
+      <a href="{% url 'menu'%}" class="bg-amber-600 px-6 py-3 rounded-lg text-lg font-medium hover:bg-amber-700 transition">
+        Cliquez ici pour compléter votre commande
+      </a>
+    </div>
+</section>
+<form action="{% url 'process_payment' %}" method="post" id="payment-form">
+    {% csrf_token %}
+    <div id="card-element"></div>
+    <button type="submit">Payer maintenant</button>
+    <div id="card-errors" role="alert"></div>
+</form>
+{% endblock content %}

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<section class="max-w mx-auto p-10 text-center">
+   <section id="accueil" class="relative h-screen flex items-center justify-center bg-cover bg-center" 
+           style="background-image: url('https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=1920&q=80');">
+    <div class="absolute inset-0 bg-black/50"></div>
+    <div class="relative z-10 text-center text-white px-6">
+      <h2 class="text-5xl md:text-6xl font-bold title-font mb-6 ">Une expérience culinaire raffinée</h2>
+      <p class="text-lg md:text-xl mb-8">Savourez des plats d’exception dans une ambiance chaleureuse et élégante.</p>
+      <a href="{% url 'menu'%}" class="bg-amber-600 px-6 py-3 rounded-lg text-lg font-medium hover:bg-amber-700 transition">
+        Découvrir le menu
+      </a>
+    </div>
+  </section>
+  <h1 class="text-4xl font-bold text-green-600">Paiement réussi ! 🎉</h1>
+  <p class="text-gray-700 mt-4 text-lg">
+    Merci pour votre commande. Nous avons bien reçu votre paiment et votre commande est en cours de traitement
+  </p>
+
+  <a href="{% url 'menu' %}" 
+     class="mt-6 inline-block bg-amber-600 text-white px-6 py-3 rounded hover:bg-amber-700 transition">
+    Retour au menu
+  </a>
+</section>
+{% endblock content %}

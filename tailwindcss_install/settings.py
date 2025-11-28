@@ -9,26 +9,28 @@ https://docs.djangoproject.com/en/5.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
-
-from pathlib import Path
-import environ
 import os
+import environ
+from pathlib import Path
 import django_heroku
 import dj_database_url
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+env = environ.Env()
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-!ac!325w3!b9!&5do#v6a@v0#!ltu*u=o+4&bsz*2_7d^fi!a!'
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['votre-url.onrender.com']
+# ALLOWED_HOSTS = ['votre-url.onrender.com']
 
 
 
@@ -46,6 +48,8 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+    
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -89,11 +93,11 @@ WSGI_APPLICATION = 'tailwindcss_install.wsgi.application'
 #         'ENGINE': 'django.db.backends.sqlite3',
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
-# }
-DATABASES = {
-    'default': dj_database_url.config()
-    }   
+# }  
 
+DATABASES = {
+    'default': dj_database_url.config(default='sqlite:///db.sqlite3')
+}
 
 
 # Password validation
@@ -148,8 +152,12 @@ django_heroku.settings(locals())
 env = environ.Env()
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
-DEBUG = env.bool("DEBUG", default=False)
-SECRET_KEY = env("SECRET_KEY")
+# DEBUG = env.bool("DEBUG", default=False)
+
+
+SECRET_KEY = env('SECRET_KEY')
+DEBUG = env.bool('DEBUG', default=False)
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['localhost'])
 
 
 EMAIL_BACKEND = env("EMAIL_BACKEND")
@@ -161,5 +169,3 @@ EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
 DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL")
 RESTAURANT_EMAIL = env("RESTAURANT_EMAIL")
 
-STRIPE_TEST_PUBLIC_KEY = os.getenv('pk_test_51SUtDkJ0Oi3Jp8AVTKOdJKLGnTNr18wLwja9eRM5sHS2bxhVJz1tSeYD7GA9cSvdq9tvlkixHzzaUo7BM3rxNofv00DK7oVChT')
-STRIPE_TEST_SECRET_KEY = os.getenv('sk_test_51SUtDkJ0Oi3Jp8AVxaiu0kfiz4L03UhQC6FBoVg0cy1b64Dt51nSpGajcwiXTOq8SQ8dtGWQj2nG2Y7l171AzS5D00tpal8vkv')

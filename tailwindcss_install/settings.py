@@ -14,6 +14,7 @@ import environ
 from pathlib import Path
 import django_heroku
 import dj_database_url
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,12 +26,12 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-# ALLOWED_HOSTS = ['votre-url.onrender.com']
+ALLOWED_HOSTS = ['#']
 
 
 
@@ -67,6 +68,7 @@ STORAGES = {
     },
 }
 
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -96,8 +98,10 @@ WSGI_APPLICATION = 'tailwindcss_install.wsgi.application'
 # }  
 
 DATABASES = {
-    'default': dj_database_url.config(default='sqlite:///db.sqlite3')
+    'default': dj_database_url.parse(config('DATABASE_URL'))
 }
+
+
 
 
 # Password validation
@@ -155,7 +159,7 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 # DEBUG = env.bool("DEBUG", default=False)
 
 
-SECRET_KEY = env('SECRET_KEY')
+
 DEBUG = env.bool('DEBUG', default=False)
 ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['localhost'])
 
